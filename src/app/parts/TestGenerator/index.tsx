@@ -38,7 +38,7 @@ const TestGenerator = () => {
   };
 
   return <>
-    <div className="container pt-8 mx-auto">
+    <div className="container pt-8 px-4 mx-auto">
       <div className="print:hidden grid gap-4 lg:grid-cols-2">
         <div className="w-full">
           <h3 className="text-xl mb-4">Add Question</h3>
@@ -103,22 +103,46 @@ const TestGenerator = () => {
           </div>
         </div>
       </div>
-      <span className="print:hidden block mt-8 mb-2 text-xs opacity-50">Pré visualização</span>
-      <div className="
-        relative
-        px-10 py-8
-        pt-20 pl-20
-        text-black
-        aspect-[210mm_297mm]
-        bg-white
-      ">
+      <span className="print:hidden block mt-8 mb-2 text-xs opacity-50">Pre visualization</span>
+      <div
+        className="
+          relative max-lg:left-[50%]
+          px-10 py-8
+          pt-20 pl-20
+          text-black
+          transform
+          max-lg:translate-x-[-22%]
+          max-lg:scale-[calc((100_/_210)_-_.05)]
+          bg-white
+          max-lg:print:transform-none
+          max-lg:print:left-auto
+        "
+        style={{
+          width: '210mm',
+          height: '297mm',
+          transformOrigin: 'top left'
+        }}
+      >
         <Button
-          className="print:hidden absolute top-0 right-0 translate-x-1/2 -translate-y-1/2"
+          className="
+            print:hidden
+            absolute
+            top-0 right-0
+            max-lg:top-[110%] max-lg:right-1/2
+            max-lg:w-16 max-lg:h-16
+            max-w-none max-h-none
+            translate-x-1/2 -translate-y-1/2
+          "
+          size="lg"
           radius="full"
           color="primary"
           onClick={() => window.print()}
         >
-          <Print />
+          <Print className="
+            block
+            max-w-none max-h-none
+            w-16 h-16
+            text-9xl lg:text-2xl" />
         </Button>
         <div className="w-full grid gap-1">
           <div className="w-full grid grid-cols-[2fr_1fr] gap-4">

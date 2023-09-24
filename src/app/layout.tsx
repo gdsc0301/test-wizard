@@ -6,8 +6,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Test Page Generator',
-  description: 'Here you can generate a test page for your students.',
+  title: 'Test Wizard - Test Page Generator',
+  description: "Introducing TestWizard – your all-in-one, lightning-fast test generator! 🚀 Say goodbye to the chaos of inconsistent assessments and hello to beautifully standardized quizzes. Whether you're a teacher, educator, or just a quiz enthusiast, TestWizard is your secret weapon. 💫✨",
   authors: [{ name: 'Guilherme Carvalho', url: 'https://www.linkedin.com/in/guilherme-c/'}],
   viewport: {
     width: 'device-width',
