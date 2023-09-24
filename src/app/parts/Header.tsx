@@ -1,12 +1,15 @@
+'use client'
+
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
 import Image from "next/image";
+import { NoteAlt } from "@mui/icons-material";
 
 function Header() {
   return (
-    <Navbar>
+    <Navbar isBordered position="sticky" className="print:hidden">
       <NavbarBrand>
-        <Image src="/ja.svg" alt="JA" width={72} height={80} className="mr-3" />
+        <NoteAlt className="text-amber-500 text-4xl mr-3 animate-pulse" />
         <p className="font-bold text-inherit">Test Generator</p>
       </NavbarBrand>
       <NavbarContent>
