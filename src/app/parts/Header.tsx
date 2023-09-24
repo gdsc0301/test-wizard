@@ -7,7 +7,7 @@ import { LinkedIn, NoteAlt } from "@mui/icons-material";
 
 function Header() {
   return (
-    <Navbar isBordered position="sticky" className="print:hidden">
+    <Navbar as={'header'} isBordered position="sticky" className="print:hidden" maxWidth="2xl">
       <NavbarBrand>
         <NoteAlt className="text-amber-500 text-4xl mr-3 animate-pulse" />
         <h1 className="font-bold text-inherit">Test Wizard 💫✨</h1>
