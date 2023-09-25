@@ -17,7 +17,7 @@ function Header() {
       </NavbarContent>
       <NavbarContent justify="end">
         <a href="https://www.linkedin.com/in/guilherme-c/" target="_blank" rel="noopener noreferrer">
-          <LinkedIn /> Contact
+          <LinkedIn /> Contact Me
         </a>
       </NavbarContent>
     </Navbar>
