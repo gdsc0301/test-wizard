@@ -1,14 +1,14 @@
 'use client';
 
-import { Add, Close, KeyboardReturn, KeyboardReturnRounded, Print, Remove } from "@mui/icons-material";
+import { Add, Close, KeyboardReturnRounded, Print, Remove } from "@mui/icons-material";
 import { Input, Button, Chip } from "@nextui-org/react";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import type Question from "./Question";
 
 const TestGenerator = () => {
-  const [screenWidth, setScreenWidth] = useState(0);
   const printSheet = useRef<HTMLDivElement>(null);
+  const [pageColumns, setPageColumns] = useState(3);
 
   const [testName, setTestName] = useState("");
   
@@ -43,22 +43,14 @@ const TestGenerator = () => {
   const print = () => {
     const head = document.head.outerHTML;
     const printWindow = window.open('', '', 'height=1000,width=800')!;
-    printWindow.document.write(`<html><head>${head}</head>`);
+    printWindow.document.write(`<html><head>
+        ${head}
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>`);
     printWindow.document.write(`<body>${printSheet.current?.innerHTML || ''}</body></html>`);
     printWindow.document.close();
     printWindow.print();
   }
-
-  useEffect(() => {
-    const resize = () => {
-      setScreenWidth(Math.min(document.body.clientWidth, 1366));
-      console.log((screenWidth/3579));
-    };
-    window.addEventListener('resize', resize);
-    resize();
-    
-    return () => document.removeEventListener('resize', resize);
-  }, []);
 
   return <>
     <div className="container w-full pt-8 px-4 mx-auto">
@@ -71,6 +63,13 @@ const TestGenerator = () => {
             <Input type="text" onChange={(e) => setQuestionB(e.target.value)} value={questionB} name="B" placeholder='Answer "B"' />
             <Input type="text" onChange={(e) => setQuestionC(e.target.value)} value={questionC} name="C" placeholder='Answer "C"' />
             <Input type="text" onChange={(e) => setQuestionD(e.target.value)} value={questionD} name="D" placeholder='Answer "D"' />
+
+            <Button
+              color="primary"
+              type="submit"
+              onClick={addQuestion}>
+              Add Question<Add />
+            </Button>
           </div>
         </div>
         <div className="w-full">
@@ -116,13 +115,29 @@ const TestGenerator = () => {
                 )
               )}
             </nav>
+            
+            <div className="columns">
+              <label>
+                <div>Page Columns</div>
+                <input
+                  type="range"
+                  min={1} max={4}
+                  onChange={(e)=>{
+                    setPageColumns(parseInt(e.target.value))
+                  }}
+                  value={pageColumns}
+                  list="markers"
+                  className="w-full text-white"
+                />
 
-            <Button
-              color="primary"
-              type="submit"
-              onClick={addQuestion}>
-              Add Question<Add />
-            </Button>
+                <datalist id="markers" className="flex justify-between w-full font-sans">
+                  <option value="1" label="1"></option>
+                  <option value="2" label="2"></option>
+                  <option value="3" label="3"></option>
+                  <option value="4" label="4"></option>
+                </datalist>
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -132,7 +147,7 @@ const TestGenerator = () => {
         <Button
             className="
               absolute
-              top-full right-0
+              top-full right-0 lg:right-2/3
               max-lg:w-16 max-lg:h-16
               max-w-none max-h-none
               lg:translate-x-1/2 -translate-y-1/2
@@ -150,16 +165,16 @@ const TestGenerator = () => {
               text-9xl lg:text-2xl" />
           </Button>
       </span>
-      <div className="pre-visualization relative overflow-scroll w-full">
+      <div className="pre-visualization relative overflow-auto w-full">
         <div
           ref={printSheet}
           className={`
-            relative
+            relative antialiased
             pb-8 pr-8
             pt-20 pl-20
             text-black
             bg-white
-            w-[3579px]
+            w-[210mm]
           `}
         >
           <div className="w-full grid gap-1">
@@ -172,7 +187,7 @@ const TestGenerator = () => {
             </div>
           </div>
           <h1 className="font-bold text-5xl mt-16 mb-10">{testName || 'Generated test'}</h1>
-          <div className="grid grid-cols-3 gap-4 mt-8">
+          <div className="grid gap-4 mt-8" style={{gridTemplateColumns: `repeat(${pageColumns}, 1fr)`}}>
             {
               questions.map((question, i) => {
                 return (
@@ -186,12 +201,14 @@ const TestGenerator = () => {
                       radius="full"
                       onClick={() => setQuestions(questions.filter(q => q !== question))}
                       className="
+                        print:hidden
                         absolute top-0 right-0
-                        flex w-6 h-6
-                        min-w-0 p-0
-                        -translate-x-1/2 -translate-y-1/2
+                        flex h-6
+                        min-w-0 py-0
+                        -translate-y-1/2
                       "
                     >
+                      remove
                       <Remove sx={{fontSize: '12px'}} />
                     </Button>
                     <h5 className="font-bold">{++i}) {question['question']}</h5>

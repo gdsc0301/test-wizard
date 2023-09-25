@@ -6,6 +6,7 @@ export function Providers({children}: { children: React.ReactNode }) {
     <NextUIProvider>
       <main
         className="
+          antialiased
           w-screen overflow-hidden
           min-h-screen pb-10 
           dark text-foreground
