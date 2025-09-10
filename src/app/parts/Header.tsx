@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent } from "@heroui/react";
-import Image from "next/image";
 import { LinkedIn, NoteAlt } from "@mui/icons-material";
 
 function Header() {

@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
-import { Add, Close, KeyboardReturnRounded } from "@mui/icons-material";
-import { Input, Button, Chip, Textarea } from "@heroui/react";
+import { FC, useEffect, useState } from "react";
+import { Add, Close, KeyboardReturnRounded, Save } from "@mui/icons-material";
+import { Input, Button, Chip, Textarea, PressEvent, Tooltip } from "@heroui/react";
 import Question from "./Question";
+import alternativeMap from "@/app/maps/AlternativeMap";
 
 type ReactSetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
@@ -18,17 +19,6 @@ type Props = {
   setMannualFields: ReactSetState<string[]>;
   questions: Question[];
   setQuestions: ReactSetState<Question[]>;
-  questionName: string;
-  setQuestionName: ReactSetState<string>;
-  questionA: string;
-  setQuestionA: ReactSetState<string>;
-  questionB: string;
-  setQuestionB: ReactSetState<string>;
-  questionC: string;
-  setQuestionC: ReactSetState<string>;
-  questionD: string;
-  setQuestionD: ReactSetState<string>;
-  addQuestion: () => void;
 }
 
 const Controls: FC<Props> = ({
@@ -43,20 +33,44 @@ const Controls: FC<Props> = ({
   newMannualField,
   setNewMannualField,
   mannualFields,
-  setMannualFields,
-  questionName,
-  setQuestionName,
-  questionA,
-  setQuestionA,
-  questionB,
-  setQuestionB,
-  questionC,
-  setQuestionC,
-  questionD,
-  setQuestionD,
-  addQuestion
+  setMannualFields
 }) => {
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+
+  const onChangeQuestion = (index: number, attribute: string, value: string) => {
+    setQuestions(currQuestions => {
+      const updatedQuestions = [...currQuestions];
+      updatedQuestions[index] = {
+        ...updatedQuestions[index],
+        [attribute]: value
+      };
+      return updatedQuestions;
+    });
+  }
+
+  const onConfirmNewQuestion = () => {
+    setQuestions(currQuestions => {
+      const updatedQuestions = [...currQuestions];
+      updatedQuestions.push({
+        question: 'Enunciado da questão',
+        A: 'Alternativa A',
+        B: 'Alternativa B',
+        C: 'Alternativa C',
+        D: 'Alternativa D',
+        E: 'Alternativa E',
+        answer: 'A'
+      });
+      return updatedQuestions;
+    });
+
+    setSelectedQuestionIndex(questions.length);
+  }
+
+  useEffect(() => {
+    if (selectedQuestionIndex >= questions.length) {
+      setSelectedQuestionIndex(questions.length - 1);
+    }
+  }, [questions, selectedQuestionIndex]);
 
   return <>
     <div className="grid gap-4 lg:grid-cols-2">
@@ -69,6 +83,7 @@ const Controls: FC<Props> = ({
               variant={selectedQuestionIndex === i ? "solid" : "light"}
               size="sm"
               color="primary"
+              isIconOnly
             >
               {i + 1}
             </Button>
@@ -78,46 +93,29 @@ const Controls: FC<Props> = ({
         <h3 className="text-xl mb-4">Nova Questão</h3>
         <div id="newQuestion" className="grid gap-2">
           <Textarea
-            onChange={(e) => setQuestionName(e.target.value)}
-            value={questionName}
+            onValueChange={(value) => onChangeQuestion(selectedQuestionIndex, 'question', value)}
+            value={questions[selectedQuestionIndex]?.question}
             name="question"
             label="Enunciado"
+            isClearable
           />
 
-          <Input
-            type="text"
-            onChange={(e) => setQuestionA(e.target.value)}
-            value={questionA}
-            name="A"
-            placeholder='Alternativa "A"'
-          />
-          <Input
-            type="text"
-            onChange={(e) => setQuestionB(e.target.value)}
-            value={questionB}
-            name="B"
-            placeholder='Alternativa "B"'
-          />
-          <Input
-            type="text"
-            onChange={(e) => setQuestionC(e.target.value)}
-            value={questionC}
-            name="C"
-            placeholder='Alternativa "C"'
-          />
-          <Input
-            type="text"
-            onChange={(e) => setQuestionD(e.target.value)}
-            value={questionD}
-            name="D"
-            placeholder='Alternativa "D"'
-          />
+          {alternativeMap.map((alt, i) => (
+            <Input
+              key={`question${i}`}
+              type="text"
+              onValueChange={(value) => onChangeQuestion(selectedQuestionIndex, alt, value)}
+              value={questions[selectedQuestionIndex]?.[alt as keyof Question] || ''}
+              name={alt}
+              placeholder={`Alternativa "${alt}"`}
+            />
+          ))}
 
           <Button
             color="primary"
-            type="submit"
-            onPress={addQuestion}>
-            Adicionar Questão <Add />
+            onPress={onConfirmNewQuestion}
+          >
+            Confirmar <Save />
           </Button>
         </div>
       </div>
@@ -151,6 +149,7 @@ const Controls: FC<Props> = ({
             endContent={<><small style={{ display: 'flex' }}><KeyboardReturnRounded /></small></>}
             onChange={e => setNewMannualField(e.target.value || '')}
           />
+
           <nav className="flex flex-wrap gap-2 mb-4">
             {mannualFields.map(field => (
               <Chip

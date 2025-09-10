@@ -18,31 +18,17 @@ const TestGenerator = () => {
   const [newMannualField, setNewMannualField] = useState("");
   const [mannualFields, setMannualFields] = useState<string[]>(['Nome']);
 
-  const [questions, setQuestions] = useState<Question[]>([]);
-
-  const [questionName, setQuestionName] = useState("Enunciado da questão");
-  const [questionA, setQuestionA] = useState("");
-  const [questionB, setQuestionB] = useState("");
-  const [questionC, setQuestionC] = useState("");
-  const [questionD, setQuestionD] = useState("");
-
-  const addQuestion = () => {
-    const newQuestionToAdd = {
-      question: questionName,
-      A: questionA,
-      B: questionB,
-      C: questionC,
-      D: questionD
-    } as Question;
-
-    setQuestions(currQuestions => [...currQuestions, newQuestionToAdd]);
-
-    setQuestionName("");
-    setQuestionA("");
-    setQuestionB("");
-    setQuestionC("");
-    setQuestionD("");
-  };
+  const [questions, setQuestions] = useState<Question[]>([
+    {
+      question: "Enunciado da questão",
+      A: "Alternativa A",
+      B: "Alternativa B",
+      C: "Alternativa C",
+      D: "Alternativa D",
+      E: "Alternativa E",
+      answer: 'A'
+    }
+  ]);
 
   const print = () => {
     const head = document.head.outerHTML;
@@ -74,17 +60,6 @@ const TestGenerator = () => {
         setMannualFields={setMannualFields}
         questions={questions}
         setQuestions={setQuestions}
-        questionName={questionName}
-        setQuestionName={setQuestionName}
-        questionA={questionA}
-        questionB={questionB}
-        questionC={questionC}
-        questionD={questionD}
-        setQuestionA={setQuestionA}
-        setQuestionB={setQuestionB}
-        setQuestionC={setQuestionC}
-        setQuestionD={setQuestionD}
-        addQuestion={addQuestion}
       />
 
       <span className="relative block mt-8 mb-2 text-xs text-white/50">
@@ -143,42 +118,32 @@ const TestGenerator = () => {
                 className="relative"
               >
                 <h3 style={regularTextSize} className="font-bold">{i + 1}) {question['question']}
-                  <Button
-                    size="sm"
-                    color="danger"
-                    radius="full"
-                    onClick={() => setQuestions(questions.filter(q => q !== question))}
-                    className="
-                      print:hidden
-                      inline-block h-6
-                      min-w-0 py-0 ml-4
-                    "
-                  >
-                    <Remove sx={{ fontSize: '12px' }} />
-                  </Button>
+                  {i > 0 && (
+                    <Button
+                      size="sm"
+                      color="danger"
+                      radius="full"
+                      onPress={() => setQuestions(questions.filter((_, j) => i !== j))}
+                      className="
+                        print:hidden
+                        inline-block h-6
+                        min-w-0 py-0 ml-4
+                      "
+                    >
+                      <Remove sx={{ fontSize: '12px' }} />
+                    </Button>
+                  )}
                 </h3>
 
                 <ol>
-                  <li style={regularTextSize}>A) {question['A']}</li>
-                  <li style={regularTextSize}>B) {question['B']}</li>
-                  <li style={regularTextSize}>C) {question['C']}</li>
-                  <li style={regularTextSize}>D) {question['D']}</li>
+                  {question['A'] && <li style={regularTextSize}>A) {question['A']}</li>}
+                  {question['B'] && <li style={regularTextSize}>B) {question['B']}</li>}
+                  {question['C'] && <li style={regularTextSize}>C) {question['C']}</li>}
+                  {question['D'] && <li style={regularTextSize}>D) {question['D']}</li>}
+                  {question['E'] && <li style={regularTextSize}>E) {question['E']}</li>}
                 </ol>
               </div>
             ))}
-
-            <div
-              key={`previewQuestion`}
-              className="relative"
-            >
-              <h5 style={regularTextSize} className="font-bold">{questions.length + 1}) {questionName}</h5>
-              <ol>
-                <li style={regularTextSize}>A) {questionA}</li>
-                <li style={regularTextSize}>B) {questionB}</li>
-                <li style={regularTextSize}>C) {questionC}</li>
-                <li style={regularTextSize}>D) {questionD}</li>
-              </ol>
-            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import './globals.scss';
+import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Providers } from './providers';
