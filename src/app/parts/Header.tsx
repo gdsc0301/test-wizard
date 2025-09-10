@@ -3,16 +3,19 @@
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent } from "@heroui/react";
 import { LinkedIn, NoteAlt } from "@mui/icons-material";
+import Image from "next/image";
+
+import logo from '../../../public/logo.png';
 
 function Header() {
   return (
     <Navbar as={'header'} isBordered position="sticky" className="print:hidden" maxWidth="2xl">
       <NavbarBrand>
-        <NoteAlt className="text-amber-500 text-4xl mr-3 animate-pulse" />
-        <h1 className="font-bold text-inherit">Gerador de Prova 💫✨</h1>
+        <Image src={logo} alt="Provinha Logo" width={40} height={40} className="mr-4" />
+        <h1 className="font-bold text-inherit">Provinha 💫✨</h1>
       </NavbarBrand>
       <NavbarContent justify="center" className="max-sm:hidden">
-        <h2>seu gerador de provas rápido e completo! 🚀</h2>
+        <h2>seu editor de provas rápido e completo! 🚀</h2>
       </NavbarContent>
       <NavbarContent justify="end">
         <a href="https://www.linkedin.com/in/guilherme-c/" target="_blank" rel="noopener noreferrer">

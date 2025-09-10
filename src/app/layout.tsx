@@ -7,10 +7,30 @@ import { Analytics } from '@vercel/analytics/react';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Gerador de Prova',
-  description: "Apresentando o Gerador de Prova – seu gerador de provas rápido e completo! 🚀 Diga adeus ao caos das avaliações inconsistentes e olá para questionários lindamente padronizados. Se você é um professor, educador ou apenas um entusiasta de questionários, o Gerador de Prova é sua arma secreta. 💫✨",
+  title: 'Provinha 💫✨',
+  description: "Crie provas com facilidade, prontas para impressão, de forma padronizada, em poucos minutos!",
   authors: [{ name: 'Guilherme Carvalho', url: 'https://www.linkedin.com/in/guilherme-c/' }],
-  applicationName: 'Gerador de Prova'
+  applicationName: 'Provinha',
+  category: 'education',
+  creator: 'Guilherme Carvalho',
+  icons: "https://provinha.vercel.app/logo.png",
+  keywords: ['prova', 'gerador de provas', 'editor de provas', 'teste', 'educação', 'ensino', 'professor', 'estudante', 'ferramenta educacional', 'impressão de provas', 'criação de testes'],
+  openGraph: {
+    title: 'Provinha 💫✨',
+    description: "Crie provas com facilidade, prontas para impressão, de forma padronizada, em poucos minutos!",
+    url: 'https://provinha.vercel.app',
+    siteName: 'Provinha',
+    images: [
+      {
+        url: 'https://provinha.vercel.app/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Provinha',
+      },
+    ],
+    locale: 'pt-BR',
+    type: 'website',
+  },
 }
 
 export const viewport: Viewport = {
