@@ -1,9 +1,9 @@
 'use client'
-import {NextUIProvider} from '@nextui-org/react';
+import {HeroUIProvider} from "@heroui/react";
 
 export function Providers({children}: { children: React.ReactNode }) {
   return (
-    <NextUIProvider>
+    <HeroUIProvider>
       <main
         className="
           antialiased
@@ -14,6 +14,6 @@ export function Providers({children}: { children: React.ReactNode }) {
         ">
         {children}
       </main>
-    </NextUIProvider>
+    </HeroUIProvider>
   )
 }

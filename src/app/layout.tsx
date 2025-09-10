@@ -1,5 +1,5 @@
 import './globals.scss';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Providers } from './providers';
 import { Analytics } from '@vercel/analytics/react';
@@ -7,21 +7,22 @@ import { Analytics } from '@vercel/analytics/react';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Test Wizard - Test Page Generator',
-  description: "Introducing TestWizard – your all-in-one, lightning-fast test generator! 🚀 Say goodbye to the chaos of inconsistent assessments and hello to beautifully standardized quizzes. Whether you're a teacher, educator, or just a quiz enthusiast, TestWizard is your secret weapon. 💫✨",
-  authors: [{ name: 'Guilherme Carvalho', url: 'https://www.linkedin.com/in/guilherme-c/'}],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    minimumScale: 1,
-    maximumScale: 1
-  },
-  applicationName: 'Test Page Generator'
+  title: 'Gerador de Prova',
+  description: "Apresentando o Gerador de Prova – seu gerador de provas rápido e completo! 🚀 Diga adeus ao caos das avaliações inconsistentes e olá para questionários lindamente padronizados. Se você é um professor, educador ou apenas um entusiasta de questionários, o Gerador de Prova é sua arma secreta. 💫✨",
+  authors: [{ name: 'Guilherme Carvalho', url: 'https://www.linkedin.com/in/guilherme-c/' }],
+  applicationName: 'Gerador de Prova'
 }
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={inter.className}>
         <Providers>
           {children}
