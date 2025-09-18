@@ -15,7 +15,7 @@ function Header() {
         <h1 className="font-bold text-inherit">Provinha 💫✨</h1>
       </NavbarBrand>
       <NavbarContent justify="center" className="max-sm:hidden">
-        <h2>seu editor de provas rápido e completo! 🚀</h2>
+        <h2>seu editor de provas gratuito, rápido e completo! 🚀</h2>
       </NavbarContent>
       <NavbarContent justify="end">
         <a href="https://www.linkedin.com/in/guilherme-c/" target="_blank" rel="noopener noreferrer">

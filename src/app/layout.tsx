@@ -8,16 +8,16 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Provinha 💫✨',
-  description: "Crie provas com facilidade, prontas para impressão, de forma padronizada, em poucos minutos!",
+  description: "Crie provas prontas para impressão, de forma simples, padronizada e gratuita!",
   authors: [{ name: 'Guilherme Carvalho', url: 'https://www.linkedin.com/in/guilherme-c/' }],
   applicationName: 'Provinha',
   category: 'education',
   creator: 'Guilherme Carvalho',
   icons: "https://provinha.vercel.app/logo.png",
-  keywords: ['prova', 'gerador de provas', 'editor de provas', 'teste', 'educação', 'ensino', 'professor', 'estudante', 'ferramenta educacional', 'impressão de provas', 'criação de testes'],
+  keywords: ['prova', 'gerador de provas', 'editor de provas', 'gratuito', 'gratis', 'teste', 'educação', 'ensino', 'professor', 'estudante', 'ferramenta educacional', 'impressão de provas', 'criação de testes'],
   openGraph: {
     title: 'Provinha 💫✨',
-    description: "Crie provas com facilidade, prontas para impressão, de forma padronizada, em poucos minutos!",
+    description: "Crie provas prontas para impressão, de forma simples, padronizada e gratuita!",
     url: 'https://provinha.vercel.app',
     siteName: 'Provinha',
     images: [
