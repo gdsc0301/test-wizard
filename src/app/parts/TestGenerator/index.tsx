@@ -31,7 +31,7 @@ const TestGenerator = () => {
   ]);
 
   const print = () => {
-    const head = document.head.outerHTML;
+    const head = document.head.innerHTML;
     const printWindow = window.open('', '', 'height=1000,width=800')!;
     printWindow.document.write(`<html><head>
         ${head}
@@ -39,7 +39,9 @@ const TestGenerator = () => {
       </head>`);
     printWindow.document.write(`<body>${printSheet.current?.innerHTML || ''}</body></html>`);
     printWindow.document.close();
-    printWindow.print();
+    printWindow.document.addEventListener('DOMContentLoaded', () => {
+      printWindow.print();
+    });
   }
 
   const regularTextSize = { fontSize: 16 * (zoomLevel) };
