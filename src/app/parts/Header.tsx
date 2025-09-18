@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent } from "@heroui/react";
-import { LinkedIn, NoteAlt } from "@mui/icons-material";
+import { LinkedIn } from "@mui/icons-material";
 import Image from "next/image";
 
 import logo from '../../../public/logo.png';
